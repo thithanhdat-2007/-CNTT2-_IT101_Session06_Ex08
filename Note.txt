@@ -1,0 +1,15 @@
+1. Phân tích lỗi
+Cả ba dòng lệnh đều dùng Out-File không có -Append nên dữ liệu bị ghi đè.
+- Dòng 1 ghi “Bat dau quet”, xóa lịch sử cũ.
+- Dòng 2 ghi các kết quả chứa “error”, xóa dòng bắt đầu.
+- Dòng 3 ghi “Ket thuc quet”, xóa toàn bộ kết quả lỗi.
+Sau mỗi lần chạy, file weekly_errors.txt chỉ còn dòng “Ket thuc quet” kèm thời gian của lần chạy mới nhất.
+2. Cách sửa và kiểm thử
+Thêm -Append vào cả ba lệnh Out-File để ghi thêm vào cuối file, giữ nguyên dữ liệu cũ.
+Lệnh	Cách hoạt động
+Out-File	Ghi đè, thay thế nội dung cũ
+Out-File -Append	Ghi nối vào cuối file, giữ nội dung cũ
+Add-Content	Thêm nội dung vào cuối file, giữ nội dung cũ
+
+
+Kiểm thử bằng cách chạy script hai lần rồi đọc file kết quả. Nếu dữ liệu ban đầu vẫn còn và có đủ nội dung của hai lần chạy thì sửa thành công.

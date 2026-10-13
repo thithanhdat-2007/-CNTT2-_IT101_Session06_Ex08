@@ -1,0 +1,45 @@
+PS C:\Users\admin> New-Item -ItemType Directory -Path "$HOME\MonitorPro-$(Get-Date -Format yyyyMMdd-HHmmss)" | Set-Location
+PS Microsoft.PowerShell.Core\FileSystem::C:\Users\admin\MonitorPro-20261013-125449>
+PS Microsoft.PowerShell.Core\FileSystem::C:\Users\admin\MonitorPro-20261013-125449> "error: Loi ket noi" | Out-File app.log
+PS Microsoft.PowerShell.Core\FileSystem::C:\Users\admin\MonitorPro-20261013-125449> "DU LIEU CU" | Out-File weekly_errors.txt
+PS Microsoft.PowerShell.Core\FileSystem::C:\Users\admin\MonitorPro-20261013-125449> @'
+>> "[$(Get-Date)] --- Bat dau quet ---" | Out-File weekly_errors.txt -Append
+>> Select-String -Path app.log -Pattern "error" | Out-File weekly_errors.txt -Append
+>> "[$(Get-Date)] --- Ket thuc quet ---" | Out-File weekly_errors.txt -Append
+>> '@ | Set-Content hourly_log.ps1
+PS Microsoft.PowerShell.Core\FileSystem::C:\Users\admin\MonitorPro-20261013-125449> .\hourly_log.ps1
+.\hourly_log.ps1 : File C:\Users\admin\MonitorPro-20261013-125449\hourly_log.ps1 cannot be loaded because running
+scripts is disabled on this system. For more information, see about_Execution_Policies at
+https:/go.microsoft.com/fwlink/?LinkID=135170.
+At line:1 char:1
++ .\hourly_log.ps1
++ ~~~~~~~~~~~~~~~~
+    + CategoryInfo          : SecurityError: (:) [], PSSecurityException
+    + FullyQualifiedErrorId : UnauthorizedAccess
+PS Microsoft.PowerShell.Core\FileSystem::C:\Users\admin\MonitorPro-20261013-125449> .\hourly_log.ps1
+.\hourly_log.ps1 : File C:\Users\admin\MonitorPro-20261013-125449\hourly_log.ps1 cannot be loaded because running
+scripts is disabled on this system. For more information, see about_Execution_Policies at
+https:/go.microsoft.com/fwlink/?LinkID=135170.
+At line:1 char:1
++ .\hourly_log.ps1
++ ~~~~~~~~~~~~~~~~
+    + CategoryInfo          : SecurityError: (:) [], PSSecurityException
+    + FullyQualifiedErrorId : UnauthorizedAccess
+PS Microsoft.PowerShell.Core\FileSystem::C:\Users\admin\MonitorPro-20261013-125449> Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned -Force
+PS Microsoft.PowerShell.Core\FileSystem::C:\Users\admin\MonitorPro-20261013-125449> .\hourly_log.ps1
+PS Microsoft.PowerShell.Core\FileSystem::C:\Users\admin\MonitorPro-20261013-125449> .\hourly_log.ps1
+PS Microsoft.PowerShell.Core\FileSystem::C:\Users\admin\MonitorPro-20261013-125449> Get-Content weekly_errors.txt
+DU LIEU CU
+[10/13/2026 12:56:09] --- Bat dau quet ---
+
+C:\Users\admin\MonitorPro-20261013-125449\app.log:1:error: Loi ket noi
+
+
+[10/13/2026 12:56:09] --- Ket thuc quet ---
+[10/13/2026 12:56:09] --- Bat dau quet ---
+
+C:\Users\admin\MonitorPro-20261013-125449\app.log:1:error: Loi ket noi
+
+
+[10/13/2026 12:56:09] --- Ket thuc quet ---
+PS Microsoft.PowerShell.Core\FileSystem::C:\Users\admin\MonitorPro-20261013-125449>
